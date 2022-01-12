@@ -28,7 +28,7 @@ return(
                                     <div class="singleProductImageInner">
                                         <img class="singleProductImageSize 
                                         fade" id="prodcutCarousel" 
-                                        src="https://bucket.shodaimama.com/files/sm/images/smprod_1624442628390_00010391_czmIWFyz_SASSMIS.webp" alt="Product Image"/>
+                                        src={props.product.image} alt="Product Image"/>
                                     </div>
                                 </div>
                                 <div class="singleProductDetails">
@@ -42,7 +42,7 @@ return(
                                     </div>
                                 </div>
                                 <div class="singleProductPrice">
-                                    <p class="singleProdcutPriceText">৳ 45</p>
+                                    <p class="singleProdcutPriceText">৳ {props.product.price}</p>
                                 </div>
                                 <div class="productQunatityAea">
                                 <div class="productQunatityAeaInner">

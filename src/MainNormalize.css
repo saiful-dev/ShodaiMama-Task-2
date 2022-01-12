@@ -703,9 +703,13 @@
 
 .addToCartPage {
     width: 100%;
+   
     position: relative;
-    margin-top: 140px;
-    background-color: var(--white)
+   
+    margin-top: 50px;
+    z-index:  25000;
+    background-color: var(--white);
+  
 }
 
 .addToCartOriginFresh {
@@ -877,6 +881,7 @@
 
 .addToCartCheckBoxAndProductAddToCart {
     display: flex;
+    
     border-bottom: 1px solid #d3d3d3
 }
 
@@ -4730,7 +4735,8 @@ a {
 .singleProductAddToCart {
     padding-top: 10px;
     padding-bottom: 10px;
-    display: flex;
+    display: flex; 
+    
     width: 100%;
     align-items: center;
     justify-content: space-between

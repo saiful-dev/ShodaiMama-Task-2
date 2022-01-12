@@ -1,4 +1,5 @@
 
+import { object } from 'prop-types';
 import React, { useState } from 'react'
 import Details from './Details'
 
@@ -13,6 +14,33 @@ export default function Productcart(props){
         setmodal(true);
     }
     
+    const addProduct=[]
+  
+    //console.log(addProduct)
+    const setDataLocal=()=>{
+    var obj={};
+     obj={
+        id:props.curval.id,
+        category: props.curval.category,
+        image:props.curval.image,
+        price: props.curval.price,
+        title:props.curval.title,
+
+    }
+    
+    //console.log(addProduct);
+    const local=JSON.parse(localStorage.getItem('product'));
+    if(local){
+        addProduct.push(...local);
+    }
+    addProduct.push(obj);
+    localStorage.setItem('product',JSON.stringify(addProduct))
+    //console.log(JSON.parse(localStorage.getItem('product')))
+
+    console.log(addProduct);
+    }
+
+
 
     return(
 
@@ -76,7 +104,10 @@ export default function Productcart(props){
                                         </span>
                                     </div>
                                     <div className="bottomAddToCartBtn">
-                                        <button className="addToBgBtnGeneral">Add To Cart</button>
+                                        <button 
+                                            className="addToBgBtnGeneral"
+                                            onClick={()=>setDataLocal()}
+                                            >Add To Cart</button>
                                     </div>
                                 </div>
                             </div>
