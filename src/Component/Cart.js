@@ -2,7 +2,7 @@
 import React from "react";
 //import './Project/static/css/styleContainer.css';
 
-import  '../MainNormalize.css'
+import './MainNormalize.css'
 export default  function Cart(){
 
     
