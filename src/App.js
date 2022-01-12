@@ -6,7 +6,7 @@ import './App.css';
 import './MainNormalize.css'
 
 import Cart from "./Component/Cart";
-import Localstorage from "./LocalStorage";
+
 import ProductContainer from "./Component/ProductContainer";
 
 

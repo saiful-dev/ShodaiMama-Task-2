@@ -2,7 +2,7 @@
 import React from "react";
 //import './Project/static/css/styleContainer.css';
 
-import './MainNormalize.css'
+//import './MainNormalize.css'
 export default  function Cart(){
 
     
@@ -19,7 +19,7 @@ return(
                                 href="/">
                                     <img
                                     className="categoryImageIcon"
-                                    src={require("./img/homeIcon.png")} />
+                                    src={require("../img/homeIcon.png")} />
                                 <span className="marginLeft">Home</span>
                             </a>
                         </li>
@@ -27,7 +27,7 @@ return(
                             <a className="leftSideBarTopNavItemLink"
                                 href="/type/Fresh?smref=DesktopLeftSidebarWidget">
                                 <img className="categoryImageIcon"
-                                    src={require('./img/freshIcon.png')} />
+                                    src={require('../img/freshIcon.png')} />
                                     <span className="marginLeft">Fresh</span>
                             </a>
                         </li>
@@ -35,14 +35,14 @@ return(
                             <a className="leftSideBarTopNavItemLink"
                                 href="/type/Regular?smref=DesktopLeftSidebarWidget">
                                 <img className="categoryImageIcon"
-                                    src={require('./img/regularIcon.png')}/>
+                                    src={require('../img/regularIcon.png')}/>
                                     <span className="marginLeft">Regular</span></a>
                         </li>
                         <li className="leftSideBarTopNavItem">
                             <a className="leftSideBarTopNavItemLink"
                                 href="/type/Preorder?smref=DesktopLeftSidebarWidget">
                                 <img className="categoryImageIcon"
-                                    src={require('./img/PreorderIcon.png')}/>
+                                    src={require('../img/PreorderIcon.png')}/>
                                     <span
                                         className="marginLeft">Preorder</span></a></li>
                     </ul>
@@ -65,7 +65,7 @@ return(
                             <a className="categoryMainarea"
                                 href="/products/hygiene?smref=DesktopLeftSidebarWidget"> 
                                 <img className="categoryImageIcon"
-                                    src={require("./img/hygieneIcon.png")} 
+                                    src={require("../img/hygieneIcon.png")} 
                                     alt="hygiene"/> 
                                     <span>Hygiene</span></a>
                         </li>

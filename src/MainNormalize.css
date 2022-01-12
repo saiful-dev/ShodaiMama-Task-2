@@ -1968,12 +1968,13 @@ a {
     overflow: hidden;
     background: #fff;
     box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
-    height: 370px
+    height: 450px
 }
 
 .productContent {
-    min-width: 130px;
-    height: calc(100% - 102px);
+    min-width: 150px;
+    /*height: calc(100% - 102px); */
+    height: auto;
     text-align: center;
     position: relative;
     border: 1px solid rgba(251, 231, 231, .38823529411764707);
@@ -2189,6 +2190,15 @@ a {
 
 .productPriceArea {
     margin-top: 5px
+}
+
+.rattingSection{
+    margin-top: 5px;
+    
+    font-weight: 700;
+    color: var(--color3);
+    font-size: 15px;
+    
 }
 
 .cartQuantityBtnPlus {
@@ -2747,6 +2757,7 @@ a {
     border: 1px solid var(--green) !important;
     font-size: 11px;
     padding: 0 10px;
+    margin: 10px;
     font-weight: 600;
     color: var(--green)
 }

@@ -1,7 +1,12 @@
-import React from "react";
+
+import React, { useState } from 'react'
+
+
 
 export default function Productcart(props){
 
+    
+    
 
     return(
 
@@ -31,16 +36,26 @@ export default function Productcart(props){
                                                 <span className="quantitySymbol">৳</span>
                                                 <span className="prodcutPrice">{props.curval.price}</span>
                                             </p>
+
+                                            {/*Ratting section*/}
+                                            <p className='rattingSection'>
+                                                <span>ratting:{' '+props.curval.rating.rate} </span> <br/>
+                                                <span>count: {' '+props.curval.rating.count} </span>
+                                            </p>
                                             </div>
                                         </div>
                                     </span>
+
+                                   
+
+
                                     <div className="productDetailsBtnArea" style={{cursor: 'pointer'}}>
                                         <button className="productCardDetailsBtn">Details</button>
                                     </div>
                                     <div>
                                         <span className="productDetailsArea">
                                         <div className="productDeliveryStatus">
-                                                <img src="/static/media/fastDelivaryIcon.86065e4e398b3a350453.png" 
+                                                <img src={require("../img/fastDelivaryIcon.png")} 
                                                 alt="bike picture"/>
                                                 <p>Next Morning</p>
                                         </div>
