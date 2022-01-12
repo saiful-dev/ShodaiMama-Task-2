@@ -1,11 +1,17 @@
 
 import React, { useState } from 'react'
-
+import Details from './Details'
 
 
 export default function Productcart(props){
 
-    
+    const [detailsStale,setdetailsState]=useState(false);
+    const [modal,setmodal]=useState(false);
+
+    const detailsStaleHandler=()=>{
+        setdetailsState(true);
+        setmodal(true);
+    }
     
 
     return(
@@ -47,10 +53,13 @@ export default function Productcart(props){
                                     </span>
 
                                    
-
+                                    {/* Details module */}
 
                                     <div className="productDetailsBtnArea" style={{cursor: 'pointer'}}>
-                                        <button className="productCardDetailsBtn">Details</button>
+                                        <button 
+                                            className="productCardDetailsBtn"
+                                            onClick={()=>  setdetailsState(true)}
+                                            >Details</button>
                                     </div>
                                     <div>
                                         <span className="productDetailsArea">
@@ -71,7 +80,13 @@ export default function Productcart(props){
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+
+        {
+            detailsStale && <Details product={props.curval} closeModal={setdetailsState}/>
+        }
+
+    </div>
 
         
 

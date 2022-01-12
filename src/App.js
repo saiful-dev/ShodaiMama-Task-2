@@ -14,6 +14,7 @@ import ProductContainer from "./Component/ProductContainer";
 function App() {
 
 const [data, setdata]=useState([]);
+const [detailsStale,setdetailsState]=useState(false);
 const [stateClick,setstateClick]=useState(false);
 
   useEffect(()=>{
@@ -46,6 +47,9 @@ console.log(uniqueCategory);
 
   const handleState=()=>{
         setstateClick(true)
+  }
+  const detailsStaleHandler=()=>{
+      setdetailsState(true);
   }
 
 
