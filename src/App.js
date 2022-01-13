@@ -13,21 +13,45 @@ import ProductContainer from "./Component/ProductContainer";
 
 function App() {
 
+
+
 const [data, setdata]=useState([]);
-const [detailsStale,setdetailsState]=useState(false);
+const [totalPrice,settotalPrice]=useState(0);  
+const [totalQnty,settotalQnty]=useState(0);
+
+const [cartdataFetch,setcartdataFetch]=useState([])
+const [cartdata,setcartdata]=useState([])
+
+const [addBtn,setaddBtn]=useState(false);
+
 const [stateClick,setstateClick]=useState(false);
+
 
   useEffect(()=>{
     const axiosData=async ()=>{
         const response =await axios('https://fakestoreapi.com/products')
-        
         setdata(response.data);
     };
     
-     axiosData();
-    
+    axiosData();
+  
   }, []);
-  console.log(data);
+
+
+
+   useEffect(()=>{
+       setaddBtn(false)
+    const cartupdate=async () =>{
+         const cartdatas=JSON.parse(localStorage.getItem('product'))
+         setcartdata(cartdatas);
+        console.log("cartdata called");
+    };
+       cartupdate();
+   },[addBtn]);
+
+
+
+  //console.log(data);
 
 
 const category=data.map(curval=>{
@@ -39,7 +63,7 @@ const category=data.map(curval=>{
 
 const uniqueCategory= [... new Set(category)]
 
-console.log(uniqueCategory);
+//console.log(uniqueCategory);
 
  
 
@@ -48,9 +72,37 @@ console.log(uniqueCategory);
   const handleState=()=>{
         setstateClick(true)
   }
-  const detailsStaleHandler=()=>{
-      setdetailsState(true);
-  }
+ 
+  {/*  data fetch from localStorage */}
+
+  //const cartdata=JSON.parse(localStorage.getItem('product'))
+ 
+  
+ var  totalprice=0;
+  var totalqntity=0;
+  
+  if(cartdata){
+   
+  totalprice=cartdata.reduce((acc,curitem)=>{
+       return acc +curitem.price
+  
+  },0)
+
+  totalqntity=cartdata.reduce((acc,curitem)=>{
+    return acc +1
+
+},0)
+
+
+//console.log(totalprice)
+
+
+//console.log('total price: '+totalprice);
+
+ 
+ 
+}
+
 
 
 return (
@@ -194,70 +246,135 @@ return (
 
 
                 <div className="headerInner">
+                    
                     <div className="headerLeftCol">
-                        <ul id="toggle__icon__area" className="toggle__icon__area">
-                            <li className="toggle__icon"></li>
-                            <li className="toggle__icon"></li>
-                            <li className="toggle__icon"></li>
-                        </ul>
-                        <div className="headerLogo"><a href="/">
-                        <img src={require("./img/logo.png")}/></a></div>
+                            <ul id="toggle__icon__area" className="toggle__icon__area">
+                                <li className="toggle__icon"></li>
+                                <li className="toggle__icon"></li>
+                                <li className="toggle__icon"></li>
+                            </ul>
+                        <div className="headerLogo">
+                            <a href="/">
+                            <img src={require("./img/logo.png")}/></a>
+                        </div>
                     </div>
+
+
                     <div className="headerMiddleCol">
-                        <div className="searchIconForMobile"><svg className="searcIconIcon" fill="#2ecc71"
-                                xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+                        <div className="searchIconForMobile">
+                            <svg className="searcIconIcon" 
+                                fill="#2ecc71"
+                                xmlns="http://www.w3.org/2000/svg" 
+                                width="15" height="15" 
+                                viewBox="0 0 15 15">
                                 <path id="fi-rr-search"
                                     d="M14.785,13.9l-3.726-3.726a6.252,6.252,0,1,0-.883.883L13.9,14.785a.624.624,0,1,0,.883-.883ZM6.23,11.223A4.993,4.993,0,1,1,11.223,6.23,4.993,4.993,0,0,1,6.23,11.223Z"
-                                    transform="translate(0.032 0.032)" fill="#3e5570"></path>
-                            </svg></div>
-                    </div>
-                    <div className="headerRightCol">
-                        <div><label className="searchArea">
-                        <img
-                              src="data:image/png;base64,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"
-                                    width="30px" height="30px" alt="" /></label></div>
-                        <div className="headerCityCol hover1"><svg stroke="currentColor" fill="currentColor"
-                               strokeWidth ="0" viewBox="0 0 384 512" className="headerLocationIcon" height="1em"
-                                width="1em" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z">
+                                    transform="translate(0.032 0.032)" 
+                                    fill="#3e5570">
                                 </path>
-                            </svg><span className="cityText">Select Delivery Location</span></div><span>
-                            <div className="headerLanguageSettingsCol profile__popup__relatvie hideProfilePopup"><svg
-                                    stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512"
-                                    className="headerLocationIcon" height="1em" width="1em"
-                                    xmlns="http://www.w3.org/2000/svg">
+                            </svg>
+                        </div>
+                    </div>
 
+                    <div className="headerRightCol">
+
+                        <div>
+                            <label className="searchArea">
+                                <img
+                                    src="data:image/png;base64,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
+                                    w5eCyEjQhyTvW7JErZMHKABqChP9/c83a3YnP5GZCezASdXp3/EESAnUFYXh4aBvkzR1+XKlTmoDwGqE/yfwr61bg/hOrvz6a2ADPqpOAR+WK0wmkP+4U50sureh2bp1FTXWaBpYy+8T3Tjpo7NngV9wf/55VC+386QYp9PdKaO/evWdwBo8uKLGtXeAasP4rP5HXV1BxpiOZmai/rkF5mXmn3Q3Bw36vYdb1QZAtSM8zf+8hweIZzixfTvqn3BSupVPviht+/eH6BzDsW3b/vefagOg2vLbcxQ/4tuMDGAUzg0bqnDkToPr10E2lkf79oXoYYaczEzzm7UBUO0JKwhMe/ZZEI6yaNu2SjySJ5d+V66Abows7tjR/ITU2kFgtWeZU1LvnTuBN8XI/v1RfnTPTCe21q8Ppvli2syZ5hdrA+CBIXpZ0pW0NJANSA8KQvl2fTMDZUqnTuY/agPggSPaMzkqJQVMl2XxsGGUPYmlouSJpWW1i2sD4IFlWVvDT4mJwHf0HDWK3xJC98T8/p94vWwNoTYAHnj0LZN7xsaCyNQ5+fkBw3li3z6gRK6/ehXwlVEHDoCQuvX+/v/7cK7/AgdgjHyqNnLSAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTEwLTA1VDEzOjI4OjU4KzAwOjAwFPvQ7AAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0xMC0wNVQxMzoyODo1OCswMDowMGWmaFAAAAAASUVORK5CYII="
+                                    width="30px" 
+                                    height="30px" alt="" />
+                            </label>
+                        </div>
+
+                        <div className="headerCityCol hover1">
+                            <svg stroke="currentColor" 
+                                fill="currentColor"
+                                strokeWidth ="0" 
+                                viewBox="0 0 384 512" 
+                                className="headerLocationIcon" 
+                                height="1em"
+                                width="1em" xmlns="http://www.w3.org/2000/svg">
                                     <path
-                                        d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z">
+                                        d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z">
                                     </path>
-                                </svg><a className="signInTextForHeader " href="/signin">Sign In</a></div>
-                        </span><a href="/cart?smref=HeaderWidget">
-                            <div className="header__cart__icon__col">
-                                <div className="cartLogo">
-                                <img src="img/cardImg.svg" /></div> 
-                            </div>
-                            
-                        </a><a > {/* href="/cart?smref=HeaderWidget"*/}
+                            </svg>
+                            <span className="cityText">Select Delivery Location</span>
+                        </div>
+
+
+
+
+                            <span>
+                                <div className="headerLanguageSettingsCol profile__popup__relatvie hideProfilePopup">
+                                    <svg
+                                        stroke="currentColor" 
+                                        fill="currentColor" 
+                                        strokeWidth="0" 
+                                        viewBox="0 0 512 512"
+                                        className="headerLocationIcon" 
+                                        height="1em" 
+                                        width="1em"
+                                        xmlns="http://www.w3.org/2000/svg">
+
+                                        <path
+                                            d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z">
+                                        </path>
+                                    </svg>
+                                
+                                    <a className="signInTextForHeader " 
+                                            href="/signin">Sign In</a>
+                                </div>
+                            </span>
+
+
+                            <a href="/cart?smref=HeaderWidget">
+                                <div className="header__cart__icon__col">
+                                    <div className="cartLogo">
+                                        <img src={require("./img/cart.png")} />
+                                    </div> 
+                                </div>
+                             </a>
+
+
+
+
+
+
+
+
+
+                        <a > {/* href="/cart?smref=HeaderWidget"*/}
                             <div 
                                     className="headerSignInCol hover1"
                                    
-                                    onClick={()=>handleState()}
+                                    onClick={()=>handleState()}   >
                                     
-                                    >
+                                    
 
                                 <div className="header__right__cart__info">
                                     <div className="togg__arrow">
-                                    <img src={require("./img/leftArrowImg.svg")} width="100%"/></div>
-                                    <p className="right__cart__info__style border__bottom__under__list">
-                                     <img className="artboardsize" src={require('./img/artboard.svg')} /> 0 </p>
-                                    <p className="right__cart__info__style"><span className="right__cart__info__icon"> ৳ </span>
-                                        0</p>
+                                        <img src={require("./img/leftArrowImg.svg")} width="100%"/>
+                                    </div>
+                                        <p className="right__cart__info__style border__bottom__under__list">
+                                     <img className="artboardsize" src={require('./img/artboard.svg')} /> {totalqntity} </p>
+                                        <p className="right__cart__info__style">
+                                        <span className="right__cart__info__icon"> ৳ </span>
+                                        {' '+totalprice.toFixed()}</p>
                                 </div>
                             </div>
                         </a>
+
+
+
+
                     </div>
                 </div> 
+
+
+
+
             </header>
 
             {/*
@@ -449,7 +566,7 @@ return (
 
                {/* card module */}
                {
-                   stateClick? <Cart/>: null
+                   stateClick? <Cart  CartClose={setstateClick}/>: null
                }
 
 
@@ -738,7 +855,7 @@ return (
                 {
 
                     uniqueCategory.map(curval=>{
-                        return (<ProductContainer data={data} category={curval}/>)
+                        return (<ProductContainer data={data} adddata={addBtn} addBtn={setaddBtn} category={curval}/>)
                     })
                 }
                         

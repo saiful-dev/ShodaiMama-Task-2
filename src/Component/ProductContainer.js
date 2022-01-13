@@ -27,7 +27,7 @@ export default function ProductContainer(props){
             props.data.map((curval,i)=>{
                 return(
                     curval.category===props.category?
-                        <Productcart curval={curval}/>: null
+                        <Productcart curval={curval} addBtn={props.addBtn}/>: null
                 )
             })
         }

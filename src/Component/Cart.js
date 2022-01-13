@@ -3,7 +3,7 @@ import React from "react";
 //import './Project/static/css/styleContainer.css';
 import AddProducts from "./AddProducts";
 //import './MainNormalize.css'
-export default  function Cart(){
+export default  function Cart(props){
 
 
 
@@ -13,12 +13,13 @@ const getData=JSON.parse(localStorage.getItem('product'))
 var total_Price=0;
 var totalQuantity=0
 
+if(getData){
 getData.map((curitem)=>{
     total_Price +=curitem.price;
     totalQuantity ++;
 
 })
-
+}
 
 
     
@@ -69,11 +70,11 @@ return(
                             
                             {/* cart list from localStorage  */}
                             { 
-                                getData.map((curPruduct)=>(
+                                getData? getData.map((curPruduct)=>(
                                     
                                         curPruduct?<AddProducts curPruduct={curPruduct}/>:null
                                     
-                                ))
+                                )):null
 
 
 
@@ -105,7 +106,7 @@ return(
                             <div className="placeOrderAltogether"><button className="placeOrderAl__btn">Place
                                     Order</button><button className="placeOrderAltogether__btn">Place Order</button></div>
                             <div className=" cartPageHeaderClose">
-                                <p className="px2 closeBtn"> ×</p>
+                                <p className="px2 closeBtn"  onClick={()=>props.CartClose(false)}> ×</p>
                             </div>
                         </div>
                     </div>

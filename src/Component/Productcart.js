@@ -18,6 +18,8 @@ export default function Productcart(props){
   
     //console.log(addProduct)
     const setDataLocal=()=>{
+
+    
     var obj={};
      obj={
         id:props.curval.id,
@@ -40,6 +42,11 @@ export default function Productcart(props){
     console.log(addProduct);
     }
 
+
+    // const totalHandler=()=>{
+    //     props.totalPrice(100+30);
+    //     props.tatalQnty(100+30);
+    // }
 
 
     return(
@@ -106,7 +113,7 @@ export default function Productcart(props){
                                     <div className="bottomAddToCartBtn">
                                         <button 
                                             className="addToBgBtnGeneral"
-                                            onClick={()=>setDataLocal()}
+                                            onClick={()=>{setDataLocal();props.addBtn(!(props.adddata))}}
                                             >Add To Cart</button>
                                     </div>
                                 </div>
