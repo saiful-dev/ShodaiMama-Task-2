@@ -355,10 +355,10 @@ return (
 
                                 <div className="header__right__cart__info">
                                     <div className="togg__arrow">
-                                        <img src={require("./img/leftArrowImg.svg")} width="100%"/>
+                                        <img src={require("./img/leftArrowImg.png")} width="100%"/>
                                     </div>
                                         <p className="right__cart__info__style border__bottom__under__list">
-                                     <img className="artboardsize" src={require('./img/artboard.svg')} /> {totalqntity} </p>
+                                     <img className="artboardsize" src={require('./img/artboard.png')} /> {totalqntity} </p>
                                         <p className="right__cart__info__style">
                                         <span className="right__cart__info__icon"> ৳ </span>
                                         {' '+totalprice.toFixed()}</p>
@@ -855,7 +855,7 @@ return (
                 {
 
                     uniqueCategory.map(curval=>{
-                        return (<ProductContainer data={data} adddata={addBtn} addBtn={setaddBtn} category={curval}/>)
+                        return (<ProductContainer data={data} cartdata={cartdata} adddata={addBtn} addBtn={setaddBtn} category={curval}/>)
                     })
                 }
                         

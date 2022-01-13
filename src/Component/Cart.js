@@ -95,7 +95,7 @@ return(
 
                     <div className="cartPageHeaderProudctCount">
                         <img className="cartPageHeaderProudctCountImg"
-                         src="/static/media/cart.95d8dc6c.svg" width="50px"/>
+                         src={require("../img/cart.png")} width="50px"/>
                         <span className="cartPagecountNumber">4
                         Items</span></div>
                     <div>

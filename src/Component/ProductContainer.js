@@ -2,9 +2,20 @@ import React from "react";
 import Productcart from './Productcart'
 export default function ProductContainer(props){
 
+    var testarr=[]
+    if(props.cartdata){
+    props.cartdata.map(curitem=>{
+        return(
+            testarr.push(curitem.id)
+        )
+    })
+    }
+    //console.log('test'+testarr);
+    
     return(
 
            
+       
             
             
           
@@ -27,7 +38,12 @@ export default function ProductContainer(props){
             props.data.map((curval,i)=>{
                 return(
                     curval.category===props.category?
-                        <Productcart curval={curval} addBtn={props.addBtn}/>: null
+                        <Productcart 
+                            curval={curval} 
+                            addBtn={props.addBtn} 
+                            dataid={curval.id}
+                            cartdata={testarr}
+                            adddata={props.adddata}/>: null
                 )
             })
         }

@@ -2,7 +2,7 @@
 import { object } from 'prop-types';
 import React, { useState } from 'react'
 import Details from './Details'
-
+import CartBtnClicked from './CartBtnClicked';
 
 export default function Productcart(props){
 
@@ -15,7 +15,7 @@ export default function Productcart(props){
     }
     
     const addProduct=[]
-  
+    
     //console.log(addProduct)
     const setDataLocal=()=>{
 
@@ -47,6 +47,14 @@ export default function Productcart(props){
     //     props.totalPrice(100+30);
     //     props.tatalQnty(100+30);
     // }
+
+    
+    
+
+     var selectdata=null;
+    
+    
+
 
 
     return(
@@ -110,11 +118,28 @@ export default function Productcart(props){
                                         </div>
                                         </span>
                                     </div>
-                                    <div className="bottomAddToCartBtn">
-                                        <button 
-                                            className="addToBgBtnGeneral"
-                                            onClick={()=>{setDataLocal();props.addBtn(!(props.adddata))}}
-                                            >Add To Cart</button>
+                                    <div className="bottomAddToCartBtn"> 
+
+                                      {/* selected cart identification */}
+                                      {
+                                        (props.cartdata.some(arrval=>arrval===props.dataid))? 
+                                      
+                                        <CartBtnClicked/>:
+                                      
+                                        (<button 
+                                        className="addToBgBtnGeneral"
+                                        onClick={()=>{setDataLocal();props.addBtn(!(props.adddata))}}
+                                        >Add To Cart
+                                        </button>)
+                                         
+                                     }
+                                    
+                                  
+                                   
+
+
+
+
                                     </div>
                                 </div>
                             </div>
