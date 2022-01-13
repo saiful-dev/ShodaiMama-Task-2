@@ -8,21 +8,23 @@ export default function Productcart(props){
 
     const [detailsStale,setdetailsState]=useState(false);
     const [modal,setmodal]=useState(false);
+    const [itemAdded,setitemAdded]=useState(true)
 
     const detailsStaleHandler=()=>{
         setdetailsState(true);
         setmodal(true);
     }
     
+   
     const addProduct=[]
-    
     //console.log(addProduct)
     const setDataLocal=()=>{
-
+        
     
     var obj={};
      obj={
         id:props.curval.id,
+        quantity:1,
         category: props.curval.category,
         image:props.curval.image,
         price: props.curval.price,
@@ -36,6 +38,8 @@ export default function Productcart(props){
         addProduct.push(...local);
     }
     addProduct.push(obj);
+    
+   
     localStorage.setItem('product',JSON.stringify(addProduct))
     //console.log(JSON.parse(localStorage.getItem('product')))
 
@@ -122,13 +126,20 @@ export default function Productcart(props){
 
                                       {/* selected cart identification */}
                                       {
-                                        (props.cartdata.some(arrval=>arrval===props.dataid))? 
+                                          
+                            
+                                        (props.cartdata.some(arrval=>arrval===props.dataid) && itemAdded)? 
                                       
-                                        <CartBtnClicked/>:
+                                        <CartBtnClicked dataid={props.dataid}  //selectedItemID={arrval} 
+                                                    curval={props.curval}
+                                                   
+                                                        addProduct={addProduct}
+                                                        itemAdded={setitemAdded}
+                                                        />:
                                       
                                         (<button 
                                         className="addToBgBtnGeneral"
-                                        onClick={()=>{setDataLocal();props.addBtn(!(props.adddata))}}
+                                        onClick={()=>{setDataLocal();props.addBtn(!(props.adddata));setitemAdded(true)}}
                                         >Add To Cart
                                         </button>)
                                          

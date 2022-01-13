@@ -41,7 +41,7 @@ const [stateClick,setstateClick]=useState(false);
 
    useEffect(()=>{
        setaddBtn(false)
-    const cartupdate=async () =>{
+        const cartupdate=async () =>{
          const cartdatas=JSON.parse(localStorage.getItem('product'))
          setcartdata(cartdatas);
         console.log("cartdata called");
@@ -855,7 +855,11 @@ return (
                 {
 
                     uniqueCategory.map(curval=>{
-                        return (<ProductContainer data={data} cartdata={cartdata} adddata={addBtn} addBtn={setaddBtn} category={curval}/>)
+                        return (<ProductContainer data={data} 
+                                    cartdata={cartdata} 
+                                    adddata={addBtn} 
+                                    addBtn={setaddBtn} 
+                                    category={curval}/>)
                     })
                 }
                         
