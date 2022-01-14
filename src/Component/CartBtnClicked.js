@@ -138,7 +138,7 @@ const QuantityPlus=()=>{
 
        cartdatas.find((curItem)=>{
             if (curItem.id ===props.dataid){
-                curItem.quantity = productCount+1;
+                curItem.quantity = productCount;
                 curItem.totalprice=curItem.price * curItem.quantity;
                 return curItem
             }
