@@ -88,7 +88,7 @@ export default function Productcart(props){
         
 
                      <div>
-                            <div className="productListArea" height='130%'>
+                            <div className="productListArea">
                                 <div className="productCart ">
                                     <span style={{cursor: 'pointer'}}>
                                         <div className="productContent">

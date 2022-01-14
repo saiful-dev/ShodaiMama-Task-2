@@ -722,7 +722,7 @@ return (
                                     <ul className="control-dots">
                                         <li className="dot selected" value="0" role="button" tabIndex="0"
                                             aria-label="slide item 1"></li>
-                                        <li className="dot" value="1" role="button" tabIndex="0" aria-label="slide item 2">
+                                       {/* <li className="dot" value="1" role="button" tabIndex="0" aria-label="slide item 2">
                                         </li>
                                         <li className="dot" value="2" role="button" tabIndex="0" aria-label="slide item 3">
                                         </li>
@@ -731,7 +731,7 @@ return (
                                         <li className="dot" value="4" role="button" tabIndex="0" aria-label="slide item 5">
                                         </li>
                                         <li className="dot" value="5" role="button" tabIndex="0" aria-label="slide item 6">
-                                        </li>
+                                            </li>*/}
                                     </ul><button type="button" aria-label="previous slide / item"
                                         className="control-arrow control-prev"></button>
                                     <div className="slider-wrapper axis-horizontal">
@@ -743,7 +743,7 @@ return (
                                                         src="https://bucket.shodaimama.com/files/sm/images/7U5Kxp1639978903729rB5vLI.png"
                                                         alt="banner-1"/></div>
                                             </li>
-                                            <li className="slide selected">
+                                            {/*<li className="slide selected">
                                                 <div className="image">
                                                 <img
                                                         src="https://bucket.shodaimama.com/files/sm/images/KI4pOd1640530128412y5em01.jpeg"
@@ -784,7 +784,7 @@ return (
                                                 <img
                                                         src="https://bucket.shodaimama.com/files/sm/images/KI4pOd1640530128412y5em01.jpeg"
                                                         alt="banner-1"/></div>
-                                            </li>
+                                        </li> */}
                                         </ul>
                                     </div><button type="button" aria-label="next slide / item"
                                         className="control-arrow control-next"></button>
