@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 export default function CartBtnClicked(props){
 
     
-    const [productCount,setproductCount]=useState(1);
-
+    //const [productCount,setproductCount]=useState(1);
+    var productCount=0;
     //console.log('props.quantity');
     //console.log(props.quantity);
     const [productState,setproductState]=useState(false);
@@ -12,12 +12,23 @@ export default function CartBtnClicked(props){
 
 
     const currentItem=JSON.parse(localStorage.getItem('product'))
-    const quantity=currentItem.find((curitem)=>{
-        if(curitem.id=== props.dataid){
-            return curitem
+
+    const quantity=currentItem.find((curitem)=>(
+        (curitem.id=== props.dataid) ?productCount=curitem.quantity:null
+            
+            
+    ))
+
+{/*  browser refresh */}
+    const cartdatas=JSON.parse(localStorage.getItem('product'))
+    cartdatas.map((select)=>{
+        if(select.id===props.dataid){
+                console.log("this item is selected")
+                console.log(select)
         }
     })
 
+    
    // setproductCount(quantity.quantity);
     //const [localcart, setlocalcart]=useState([])
     //var productCount=1
@@ -51,8 +62,8 @@ const QuantityMinus=()=>{
         
     var itemfind=[]
        
-        console.log(productCount)
-        console.log('productCount')
+        //console.log(productCount)
+       // console.log('productCount')
 
         if(productCount === 1) {
             props.itemAdded(false)
@@ -71,13 +82,13 @@ const QuantityMinus=()=>{
      
             //  })
             
-            console.log("working Module")
-            console.log(cartdatas)
+            //console.log("working Module")
+            //console.log(cartdatas)
             //console.log(props.dataid);
             
              localStorage.setItem('product',JSON.stringify(itemfind?[itemfind]:null))
          //console.log(cartdatas);
-            console.log(itemfind);
+            //console.log(itemfind);
         
 
         }
@@ -85,7 +96,7 @@ const QuantityMinus=()=>{
 
 
         if(productCount>1){
-            setproductCount(productCount-1)
+            productCount -=1;
 
         
             var cartdatas=JSON.parse(localStorage.getItem('product'))
@@ -103,10 +114,10 @@ const QuantityMinus=()=>{
      
                 })
            
-            console.log(cartdatas);
+            //console.log(cartdatas);
             localStorage.setItem('product',JSON.stringify(cartdatas))
-            console.log(cartdatas);
-            console.log(itemfind);
+            //console.log(cartdatas);
+            //console.log(itemfind);
         
         }
 
@@ -120,7 +131,7 @@ const QuantityMinus=()=>{
 }
 const QuantityPlus=()=>{
     //var itemfind=0
-    setproductCount(productCount+1)
+    productCount=productCount+1;
 
     const cartdatas=JSON.parse(localStorage.getItem('product'))
     

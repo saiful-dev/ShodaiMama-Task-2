@@ -3,7 +3,7 @@ import React from "react";
 import App from "./App";
 
 
-
+console.clear();
 
 export default function Main(){
 
