@@ -72,7 +72,11 @@ return(
                             { 
                                 getData? getData.map((curPruduct)=>(
                                     
-                                        curPruduct?<AddProducts curPruduct={curPruduct}/>:null
+                                        curPruduct?<AddProducts 
+                                        curPruduct={curPruduct} 
+                                        quantity={curPruduct.quantity}
+                                        totalprice={curPruduct.totalprice}
+                                        />:null
                                     
                                 )):null
 

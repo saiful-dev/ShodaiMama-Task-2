@@ -9,7 +9,7 @@ export default function AddProducts(props){
                                   
         <div className="singleProductAddToCartQty">
         <button className="singleProductAddToCartPlus ">+</button><span
-                className="singleProductAddToCartQtyNumber">1</span>
+                className="singleProductAddToCartQtyNumber">{props.quantity}</span>
         <button className="singleProductAddToCartMinus">-</button></div>
         <div className="singleProductAddToCartImg">
             <img className="singleProductAddToCartImgSize"
@@ -24,7 +24,7 @@ export default function AddProducts(props){
         </div>
         <p className="singleProductAddToCartTotalPrice">
         <span className="singleProductAddToCartPriceSymbole">৳ </span>
-            <span className="singleProductAddToCartTotalPriceText">{props.curPruduct.price}</span> <br/></p>
+            <span className="singleProductAddToCartTotalPriceText">{props.totalprice}</span> <br/></p>
         <div className="singleProductAddToCartClose"><span>×</span></div>
         </div>
         
