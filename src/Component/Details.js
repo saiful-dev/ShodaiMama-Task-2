@@ -1,12 +1,8 @@
 
 import React, { useEffect, useState } from "react";
-import Modal from './Modal'
+
 
 export default function Details(props){
-
-
-
-
 
 
 return(
