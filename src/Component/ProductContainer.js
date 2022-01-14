@@ -40,6 +40,7 @@ export default function ProductContainer(props){
                     curval.category===props.category?
                         <Productcart 
                             curval={curval} 
+                            quantity={curval.quantity}
                             addBtn={props.addBtn} 
                             dataid={curval.id}
                             cartdata={testarr}

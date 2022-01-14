@@ -1,6 +1,7 @@
 
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
+
 import './App.css';
 //import './Project/static/css/styleContainer.css'
 import './MainNormalize.css'
@@ -13,18 +14,16 @@ import ProductContainer from "./Component/ProductContainer";
 
 function App() {
 
-
-
 const [data, setdata]=useState([]);
 const [totalPrice,settotalPrice]=useState(0);  
 const [totalQnty,settotalQnty]=useState(0);
-
 const [cartdataFetch,setcartdataFetch]=useState([])
 const [cartdata,setcartdata]=useState([])
-
 const [addBtn,setaddBtn]=useState(false);
-
 const [stateClick,setstateClick]=useState(false);
+
+var totalprice=0;
+var totalqntity=0
 
 
   useEffect(()=>{
@@ -32,30 +31,39 @@ const [stateClick,setstateClick]=useState(false);
         const response =await axios('https://fakestoreapi.com/products')
         setdata(response.data);
     };
-    
-    axiosData();
-  
+    axiosData();  
   }, []);
 
 
+  
 
-   useEffect(()=>{
+   useEffect(()=>{      
        setaddBtn(false)
         const cartupdate=async () =>{
-         const cartdatas=JSON.parse(localStorage.getItem('product'))
-         setcartdata(cartdatas);
-        console.log("cartdata called");
+        const cartdatas=await JSON.parse(localStorage.getItem('product'))
+        setcartdata(cartdatas);
+
+        totalprice=cartdatas.reduce((acc,curitem)=>{
+            return acc +curitem.totalprice
+            //console.log(totalprice)
+        },0)
+     
+       //console.log("price check")
+       //console.log(cartdata)
+       //console.log(totalprice)
+       totalqntity=cartdatas.reduce((acc,curitem)=>{
+         return (acc +curitem.quantity)
+     
+     },0)
+
     };
        cartupdate();
    },[addBtn]);
 
 
 
-  //console.log(data);
-
 
 const category=data.map(curval=>{
-
         return(
             curval.category
 )
@@ -63,11 +71,6 @@ const category=data.map(curval=>{
 
 const uniqueCategory= [... new Set(category)]
 
-//console.log(uniqueCategory);
-
- 
-
-  
 
   const handleState=()=>{
         setstateClick(true)
@@ -78,34 +81,46 @@ const uniqueCategory= [... new Set(category)]
   //const cartdata=JSON.parse(localStorage.getItem('product'))
  
   
- var  totalprice=0;
-  var totalqntity=0;
+
+
   
+
+  
+
+  
+  
+  
+
+
   if(cartdata){
-   
-  totalprice=cartdata.reduce((acc,curitem)=>{
-       return acc +curitem.price
+        
+    
+    totalprice=cartdata.reduce((acc,curitem)=>{
+         return acc +curitem.totalprice
+         //console.log(totalprice)
+     },0)
+  
+    //console.log("price check")
+    //console.log(cartdata)
+    //console.log(totalprice)
+    totalqntity=cartdata.reduce((acc,curitem)=>{
+      return (acc +curitem.quantity)
   
   },0)
-
-  totalqntity=cartdata.reduce((acc,curitem)=>{
-    return acc +1
-
-},0)
-
-
-//console.log(totalprice)
-
-
-//console.log('total price: '+totalprice);
-
+  
+  console.log(totalprice)
  
- 
-}
+  
+  }
+  
+  
+
 
 
 
 return (
+
+
 <div id='rooot'>
    <div>
         <header className="headerArea pl2 clearFix">
@@ -361,7 +376,7 @@ return (
                                      <img className="artboardsize" src={require('./img/artboard.png')} /> {totalqntity} </p>
                                         <p className="right__cart__info__style">
                                         <span className="right__cart__info__icon"> ৳ </span>
-                                        {' '+totalprice.toFixed()}</p>
+                                        {totalprice.toFixed()}</p>
                                 </div>
                             </div>
                         </a>
@@ -1202,6 +1217,8 @@ return (
 
   </div>
   </div>
+
+  
   );
 }
 

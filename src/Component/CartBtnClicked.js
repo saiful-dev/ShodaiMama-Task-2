@@ -5,7 +5,20 @@ export default function CartBtnClicked(props){
     
     const [productCount,setproductCount]=useState(1);
 
+    //console.log('props.quantity');
+    //console.log(props.quantity);
     const [productState,setproductState]=useState(false);
+
+
+
+    const currentItem=JSON.parse(localStorage.getItem('product'))
+    const quantity=currentItem.find((curitem)=>{
+        if(curitem.id=== props.dataid){
+            return curitem
+        }
+    })
+
+   // setproductCount(quantity.quantity);
     //const [localcart, setlocalcart]=useState([])
     //var productCount=1
 
@@ -36,24 +49,97 @@ export default function CartBtnClicked(props){
 
 const QuantityMinus=()=>{
         
-        setproductCount(productCount-1)
-        
+    var itemfind=[]
+       
+        console.log(productCount)
+        console.log('productCount')
+
         if(productCount === 1) {
             props.itemAdded(false)
-        }
-       
+
+
+            var cartdatas=JSON.parse(localStorage.getItem('product'))
         
+        
+            itemfind=cartdatas.find(curItem=>  !(curItem.id === props.dataid))
+            //      if (curItem.id ===props.dataid){
+            //          curItem.quantity =0;
+            //          //curItem.price=curItem.price * curItem.quantity;
+            //          curItem.totalprice=0;
+            //          return curItem
+            //      }
+     
+            //  })
             
+            console.log("working Module")
+            console.log(cartdatas)
+            //console.log(props.dataid);
+            
+             localStorage.setItem('product',JSON.stringify(itemfind?[itemfind]:null))
+         //console.log(cartdatas);
+            console.log(itemfind);
+        
+
+        }
+         
+
+
+        if(productCount>1){
+            setproductCount(productCount-1)
+
+        
+            var cartdatas=JSON.parse(localStorage.getItem('product'))
+        
+        
+            itemfind=cartdatas.find((curItem)=>{
+
+           
+                 if (curItem.id ===props.dataid){
+                     curItem.quantity -=1;
+                     curItem.price=curItem.price * curItem.quantity;
+                     curItem.totalprice=curItem.price * curItem.quantity;
+                     return curItem
+                 }
+     
+                })
+           
+            console.log(cartdatas);
+            localStorage.setItem('product',JSON.stringify(cartdatas))
+            console.log(cartdatas);
+            console.log(itemfind);
+        
+        }
+
+        
         
    
-        //console.log("Working here");
-        //console.log(selectItem)
-        //console.log(props.addProduct)
+       
+        
             
        
 }
 const QuantityPlus=()=>{
+    //var itemfind=0
     setproductCount(productCount+1)
+
+    const cartdatas=JSON.parse(localStorage.getItem('product'))
+    
+
+       cartdatas.find((curItem)=>{
+            if (curItem.id ===props.dataid){
+                curItem.quantity = productCount+1;
+                curItem.totalprice=curItem.price * curItem.quantity;
+                return curItem
+            }
+
+        })
+    
+    
+
+    localStorage.setItem('product',JSON.stringify(cartdatas))
+    //setTimeout(() => { console.log("World!"); }, 2000);
+    console.log(cartdatas);
+    
 }
    
 
@@ -62,7 +148,7 @@ return(
 <div className="addToBgBtnClick">
     <button className="cartQuantityBtnMinus 
             activeBtnShadow" 
-            onClick={()=>QuantityMinus()}
+            onClick={()=>{QuantityMinus();props.addBtn(true)}}
         id="quantityDecreamentBtn">
         <svg xmlns="http://www.w3.org/2000/svg" 
             width="7" 
@@ -70,7 +156,7 @@ return(
             viewBox="0 0 7 19">
 
             <text id="_-" 
-                dataName="-" 
+                //data="-" 
                 transform="translate(0 15)" 
                 fill="#fff" fontSize="16" 
                 fontFamily="Montserrat-Medium, Montserrat" 
@@ -85,7 +171,7 @@ return(
     </p>
         <button className="cartQuantityBtnPlus 
                 activeBtnShadow" 
-                onClick={()=>{QuantityPlus()}}
+                onClick={()=>{QuantityPlus();props.addBtn(true)}}
             id="quantityIncreamentBtn">
             <svg xmlns="http://www.w3.org/2000/svg" 
             width="10" 
@@ -93,7 +179,7 @@ return(
             viewBox="0 0 10 19">
 
         <text id="_" 
-            dataName="+" 
+           // dataName="+" 
             transform="translate(0 15)" 
             fill="#fff" 
             fontSize="16" 
